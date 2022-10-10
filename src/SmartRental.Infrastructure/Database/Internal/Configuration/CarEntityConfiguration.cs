@@ -13,11 +13,6 @@ namespace SmartRental.Infrastructure.Database.Internal.Configuration
                 .HasBaseType<DbEntity<int>>();
 
             builder
-                .Property(ce => ce.CarType)
-                .IsRequired()
-                .HasConversion<string>();
-
-            builder
                 .Property(ce => ce.Name)
                 .IsRequired();
 

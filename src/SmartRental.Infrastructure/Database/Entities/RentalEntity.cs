@@ -10,12 +10,17 @@ namespace SmartRental.Infrastructure.Database.Entities
     {
 
         /// <summary>
+        /// Rental car reference identifier
+        /// </summary>
+        public int CarId { get; set; }
+
+        /// <summary>
         /// Rental customer reference identifier
         /// </summary>
         public int CustomerId { get; set; }
 
         /// <summary>
-        /// Flag indicating price of the rental was already settled
+        /// Flag indicating rental price was settled
         /// </summary>
         public bool IsPaid { get; set; }
 
@@ -35,11 +40,6 @@ namespace SmartRental.Infrastructure.Database.Entities
         public DateTime PickupDateTime { get; set; }
 
         /// <summary>
-        /// Pickup location
-        /// </summary>
-        public Location PickupLocation { get; set; }
-
-        /// <summary>
         /// Total price of the rental
         /// </summary>
         public decimal Price { get; set; }
@@ -48,15 +48,5 @@ namespace SmartRental.Infrastructure.Database.Entities
         /// Return date and time
         /// </summary>
         public DateTime ReturnDateTime { get; set; }
-
-        /// <summary>
-        /// Return location
-        /// </summary>
-        public Location ReturnLocation { get; set; }
-
-        /// <summary>
-        /// Rental car reference identifier
-        /// </summary>
-        public int VehicleId { get; set; }
     }
 }

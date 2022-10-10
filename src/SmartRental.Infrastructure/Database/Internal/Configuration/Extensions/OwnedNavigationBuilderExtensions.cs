@@ -27,22 +27,5 @@ namespace SmartRental.Infrastructure.Database.Internal.Configuration.Extensions
 
             return builder;
         }
-
-        public static OwnedNavigationBuilder<TEntity, Location> OwnsLocation<TEntity>(
-            this EntityTypeBuilder<TEntity> parentBuilder
-            , Expression<Func<TEntity, Location>> accessor)
-            where TEntity : class
-        {
-            var builder = parentBuilder.OwnsOne(accessor!);
-
-            builder
-                .OwnsOne(l => l.Address);
-
-            builder
-                .Property(l => l.Name)
-                .IsRequired();
-
-            return builder;
-        }
     }
 }

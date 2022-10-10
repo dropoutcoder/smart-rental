@@ -34,9 +34,6 @@ namespace SmartRental.Infrastructure.Database.Internal.Configuration
                 .IsRequired();
 
             builder
-                .OwnsLocation(re => re.PickupLocation);
-
-            builder
                 .Property(re => re.Price)
                 .IsRequired();
 
@@ -45,10 +42,7 @@ namespace SmartRental.Infrastructure.Database.Internal.Configuration
                 .IsRequired();
 
             builder
-                .OwnsLocation(re => re.ReturnLocation);
-
-            builder
-                .Property(re => re.VehicleId)
+                .Property(re => re.CarId)
                 .IsRequired();
         }
     }

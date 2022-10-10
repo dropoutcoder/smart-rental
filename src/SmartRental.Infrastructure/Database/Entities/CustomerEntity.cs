@@ -1,5 +1,5 @@
-﻿using SmartRental.Infrastructure.Database.Entities.Abstraction;
-using SmartRental.Infrastructure.Database.ComplexTypes;
+﻿using SmartRental.Infrastructure.Database.ComplexTypes;
+using SmartRental.Infrastructure.Database.Entities.Abstraction;
 
 namespace SmartRental.Infrastructure.Database.Entities
 {
@@ -11,7 +11,6 @@ namespace SmartRental.Infrastructure.Database.Entities
         /// <summary>
         /// Customer's single given name, or multiple given names separated by space character
         /// </summary>
-        /// <remarks></remarks>
         public string GivenName { get; set; }
 
         /// <summary>

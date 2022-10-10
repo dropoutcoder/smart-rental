@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace SmartRental.Infrastructure.Database
 {
-    internal class DatabaseContext : DbContext
+    public class DatabaseContext : DbContext
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

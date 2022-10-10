@@ -16,21 +16,5 @@ namespace SmartRental.Infrastructure.Database.Entities
         /// Car name including version
         /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// Car type
-        /// </summary>
-        public Type CarType { get; set; }
-
-        /// <summary>
-        /// Car type
-        /// </summary>
-        public enum Type
-        {
-            None = 0,
-            Sedan = 1,
-            SUV = 2,
-            // etc...
-        }
     }
 }
