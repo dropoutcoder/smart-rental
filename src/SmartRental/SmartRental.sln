@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartRental", "SmartRental.csproj", "{B1D9BCA7-A90D-4FE3-A447-F5147D97D418}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartRental.Operations", "..\SmartRental.Operations\SmartRental.Operations.csproj", "{11C2F062-7355-4739-A446-7B644F79F976}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B1D9BCA7-A90D-4FE3-A447-F5147D97D418}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1D9BCA7-A90D-4FE3-A447-F5147D97D418}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1D9BCA7-A90D-4FE3-A447-F5147D97D418}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11C2F062-7355-4739-A446-7B644F79F976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11C2F062-7355-4739-A446-7B644F79F976}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11C2F062-7355-4739-A446-7B644F79F976}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11C2F062-7355-4739-A446-7B644F79F976}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
