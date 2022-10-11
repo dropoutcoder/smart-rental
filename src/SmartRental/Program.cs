@@ -1,4 +1,5 @@
 
+using SmartRental.Diagnostics;
 using SmartRental.Infrastructure.Extensions;
 
 namespace SmartRental
@@ -29,6 +30,8 @@ namespace SmartRental
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
+
+            app.UseMiddleware<ApiExceptionHandlerMiddleware>();
 
             app.MapControllers();
 
