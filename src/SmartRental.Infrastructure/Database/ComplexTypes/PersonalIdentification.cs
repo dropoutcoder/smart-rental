@@ -20,7 +20,7 @@
         /// </summary>
         public enum Type
         {
-            IdCard = 0,
+            NationalId = 0,
             Passport = 1
         }
     }
