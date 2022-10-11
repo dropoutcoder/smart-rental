@@ -12,7 +12,10 @@ namespace SmartRental
             // Add services to the container.
 
             builder.Services.AddControllers();
+
             builder.Services.AddDatabase("SmartRental");
+
+            builder.Services.AddOperations();
 
             var app = builder.Build();
 
