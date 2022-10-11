@@ -5,9 +5,11 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartRental", "SmartRental.csproj", "{B1D9BCA7-A90D-4FE3-A447-F5147D97D418}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartRental.Operations", "..\SmartRental.Operations\SmartRental.Operations.csproj", "{11C2F062-7355-4739-A446-7B644F79F976}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartRental.Operations", "..\SmartRental.Operations\SmartRental.Operations.csproj", "{11C2F062-7355-4739-A446-7B644F79F976}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartRental.Infrastructure", "..\SmartRental.Infrastructure\SmartRental.Infrastructure.csproj", "{899117F4-3424-4057-9827-2982D8B047F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartRental.Infrastructure", "..\SmartRental.Infrastructure\SmartRental.Infrastructure.csproj", "{899117F4-3424-4057-9827-2982D8B047F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{745FBD29-0433-4003-8AA3-7CD2103B11C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
