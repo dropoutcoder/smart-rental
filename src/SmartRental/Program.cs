@@ -1,4 +1,6 @@
 
+using SmartRental.Infrastructure.Extensions;
+
 namespace SmartRental
 {
     public class Program
@@ -10,6 +12,7 @@ namespace SmartRental
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddDatabase("SmartRental");
 
             var app = builder.Build();
 
