@@ -1,10 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.Build.Evaluation;
-using SmartRental.Operations;
+﻿using SmartRental.Operations;
 using System.Net;
-using System.Text.Json;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace SmartRental.Diagnostics
 {
