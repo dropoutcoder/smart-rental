@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SmartRental.Infrastructure;
+﻿using SmartRental.Infrastructure;
 
 namespace SmartRental.Operations.Abstraction
 {

@@ -17,7 +17,7 @@ namespace SmartRental.Infrastructure.Extensions
 
             services
                 .AddScoped<IHandler<CreateCar, CarEntity>, CreateCarHadler>()
-                .AddScoped<IHandler<CreateCustomer, CustomerEntity> , CreateCustomerHandler >()
+                .AddScoped<IHandler<CreateCustomer, CustomerEntity>, CreateCustomerHandler>()
                 .AddScoped<IHandler<CreateRental, RentalEntity>, CreateRentalHandler>()
                 .AddScoped<IHandler<CancelRental, RentalEntity>, CancelRentalHandler>();
 
