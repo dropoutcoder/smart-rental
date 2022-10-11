@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SmartRental.Infrastructure.Database;
-using System.ComponentModel.DataAnnotations;
 
 namespace SmartRental.Operations.Abstraction
 {

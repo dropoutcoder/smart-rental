@@ -1,6 +1,6 @@
 ﻿namespace SmartRental.Infrastructure.Database.Entities.Abstraction
 {
-    public abstract class DbEntity<TKey> : IEquatable<DbEntity<TKey>?> where TKey: IEquatable<TKey>
+    public abstract class DbEntity<TKey> : IEquatable<DbEntity<TKey>?> where TKey : IEquatable<TKey>
     {
         /// <summary>
         /// Entity identifier

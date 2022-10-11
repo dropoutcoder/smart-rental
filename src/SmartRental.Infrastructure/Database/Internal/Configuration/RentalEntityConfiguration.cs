@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SmartRental.Infrastructure.Database.Entities;
 using SmartRental.Infrastructure.Database.Entities.Abstraction;
-using SmartRental.Infrastructure.Database.Internal.Configuration.Extensions;
 
 namespace SmartRental.Infrastructure.Database.Internal.Configuration
 {

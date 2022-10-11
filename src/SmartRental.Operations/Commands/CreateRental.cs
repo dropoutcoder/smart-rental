@@ -1,5 +1,4 @@
-﻿using SmartRental.Infrastructure.Database.ComplexTypes;
-using SmartRental.Operations.Enumerations;
+﻿using SmartRental.Operations.Enumerations;
 using System.ComponentModel.DataAnnotations;
 
 namespace SmartRental.Operations.Commands
@@ -58,7 +57,7 @@ namespace SmartRental.Operations.Commands
         /// <summary>
         /// Return date and time
         /// </summary>
-        [Required] 
+        [Required]
         public DateTime ReturnDateTime { get; set; }
     }
 }

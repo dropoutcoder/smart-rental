@@ -45,7 +45,7 @@ namespace SmartRental.Operations.Handlers
 
         protected override async Task<bool> ValidateAsync(CreateRental command)
         {
-            if(command.PickupDateTime.AddDays(1).Date <= command.ReturnDateTime.Date)
+            if (command.PickupDateTime.AddDays(1).Date <= command.ReturnDateTime.Date)
             {
                 return false;
             }
