@@ -21,6 +21,7 @@ namespace SmartRental
             }
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.MapControllers();
