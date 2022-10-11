@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SmartRental.Infrastructure.Database.Entities;
 using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
@@ -27,6 +28,23 @@ namespace SmartRental.Controllers
             var result = await handler.ExecuteAsync(command);
 
             return Created($"api/customer/{result.Id}", null);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAsync([FromRoute] int id, [FromServices] IQueryable<CustomerEntity> customers)
+        {
+
+            var result = await customers.SingleOrDefaultAsync(c => c.Id == id);
+
+            return Ok(result);
+        }
+
+        [HttpGet()]
+        public async Task<IActionResult> ListAsync([FromServices] IQueryable<CustomerEntity> customers)
+        {
+            var result = await customers.ToListAsync();
+
+            return Ok(result);
         }
     }
 }
