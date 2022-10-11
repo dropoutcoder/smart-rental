@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace SmartRental.Infrastructure.Database
+namespace SmartRental.Infrastructure.Database.Internal
 {
-    public class DatabaseContext : DbContext
+    internal class DatabaseContext : DbContext
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
