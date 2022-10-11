@@ -25,8 +25,9 @@ namespace SmartRental.Operations.Handlers
                    IsCancelled = false,
                    IsPaid = command.IsPaid,
                    LicenceNumber = command.LicenceNumber,
-                   PersonalDocument = new PersonalIdentification { 
-                       Number = command.PersonalDocumentNumber, 
+                   PersonalDocument = new PersonalIdentification
+                   {
+                       Number = command.PersonalDocumentNumber,
                        PersonalIdentificationType = (PersonalIdentification.Type)command.PersonalDocumentType
                    },
                    PickupDateTime = command.PickupDateTime,

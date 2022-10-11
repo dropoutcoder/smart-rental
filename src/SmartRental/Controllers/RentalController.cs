@@ -31,7 +31,7 @@ namespace SmartRental.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> CancelAsync([FromRoute]int id, [FromServices] IHandler<CancelRental, RentalEntity> handler)
+        public async Task<IActionResult> CancelAsync([FromRoute] int id, [FromServices] IHandler<CancelRental, RentalEntity> handler)
         {
             if (!ModelState.IsValid)
             {
