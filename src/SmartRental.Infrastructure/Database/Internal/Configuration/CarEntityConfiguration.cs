@@ -19,6 +19,18 @@ namespace SmartRental.Infrastructure.Database.Internal.Configuration
             builder
                 .Property(ce => ce.RegistrationNumber)
                 .IsRequired();
+
+            builder.HasData(new CarEntity
+            {
+                Id = 1,
+                Name = "Skoda Fabia",
+                RegistrationNumber = "ABC1111"
+            }, new CarEntity
+            {
+                Id = 2,
+                Name = "Opel Corsa",
+                RegistrationNumber = "CRS2222"
+            });
         }
     }
 }

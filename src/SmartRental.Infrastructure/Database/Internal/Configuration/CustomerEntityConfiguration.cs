@@ -27,6 +27,21 @@ namespace SmartRental.Infrastructure.Database.Internal.Configuration
             builder
                 .Property(ce => ce.Surname)
                 .IsRequired();
+
+            builder
+                .HasData(new CustomerEntity
+                {
+                    BillingAddress = new ComplexTypes.Address
+                    {
+                        City = "Marsaskala",
+                        PostalCode = "MSK 4070",
+                        Street = "Triq Il-Btieti"
+                    },
+                    DateOfBirth = DateTime.UtcNow.Date.AddYears(40),
+                    GivenName = "Petr",
+                    Surname = "Sramek",
+                    Id = 1
+                });
         }
     }
 }

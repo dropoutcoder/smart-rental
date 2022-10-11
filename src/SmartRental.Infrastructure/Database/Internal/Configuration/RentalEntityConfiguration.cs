@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SmartRental.Infrastructure.Database.Entities;
 using SmartRental.Infrastructure.Database.Entities.Abstraction;
+using SmartRental.Infrastructure.Database.Internal.Configuration.Extensions;
 
 namespace SmartRental.Infrastructure.Database.Internal.Configuration
 {
@@ -29,6 +30,9 @@ namespace SmartRental.Infrastructure.Database.Internal.Configuration
                 .IsRequired();
 
             builder
+                .OwnsPersonalDocument(re => re.PersonalDocument);
+
+            builder
                 .Property(re => re.PickupDateTime)
                 .IsRequired();
 
@@ -43,6 +47,20 @@ namespace SmartRental.Infrastructure.Database.Internal.Configuration
             builder
                 .Property(re => re.CarId)
                 .IsRequired();
+
+            builder
+                .HasData(new RentalEntity
+                {
+                    CarId = 1,
+                    CustomerId = 1,
+                    Id = 1,
+                    IsCancelled = false,
+                    IsPaid = true,
+                    LicenceNumber = "PS12345",
+                    PickupDateTime = DateTime.UtcNow.AddDays(2),
+                    Price = 100m,
+                    ReturnDateTime = DateTime.UtcNow.AddDays(8)
+                });
         }
     }
 }
