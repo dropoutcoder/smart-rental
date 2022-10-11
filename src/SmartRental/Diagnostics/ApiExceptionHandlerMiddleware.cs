@@ -14,7 +14,7 @@ namespace SmartRental.Diagnostics
 
         public async Task Invoke(HttpContext context)
         {
-            if (context.Request.Path.StartsWithSegments("api"))
+            if (context.Request.Path.StartsWithSegments("/api"))
             {
                 try
                 {
