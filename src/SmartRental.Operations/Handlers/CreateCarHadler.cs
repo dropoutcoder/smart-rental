@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmartRental.Infrastructure;
 using SmartRental.Infrastructure.Database.Entities;
 using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
@@ -8,7 +9,7 @@ namespace SmartRental.Operations.Handlers
 {
     internal class CreateCarHadler : Handler<CreateCar, CarEntity>
     {
-        public CreateCarHadler(DbContext database)
+        public CreateCarHadler(DatabaseContext database)
             : base(database) { }
 
         protected override async Task<CarEntity> ExecuteCoreAsync(CreateCar command)

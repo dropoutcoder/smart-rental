@@ -1,15 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmartRental.Infrastructure;
 
 namespace SmartRental.Operations.Abstraction
 {
     public abstract class Handler<TCommand, TResult> : IHandler<TCommand, TResult>
     {
-        public Handler(DbContext database)
+        public Handler(DatabaseContext database)
         {
             Database = database ?? throw new ArgumentNullException(nameof(database));
         }
 
-        protected DbContext Database { get; }
+        protected DatabaseContext Database { get; }
 
         public async Task<TResult> ExecuteAsync(TCommand command)
         {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmartRental.Infrastructure;
 using SmartRental.Infrastructure.Database.Entities;
 using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
@@ -8,7 +9,7 @@ namespace SmartRental.Operations.Handlers
 {
     internal class SettleRentalPriceHandler : Handler<CancelRental, RentalEntity>
     {
-        public SettleRentalPriceHandler(DbContext database)
+        public SettleRentalPriceHandler(DatabaseContext database)
             : base(database) { }
 
         protected override async Task<RentalEntity> ExecuteCoreAsync(CancelRental command)

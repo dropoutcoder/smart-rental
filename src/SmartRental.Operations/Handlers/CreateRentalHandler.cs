@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmartRental.Infrastructure;
 using SmartRental.Infrastructure.Database.Entities;
 using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
@@ -8,7 +9,7 @@ namespace SmartRental.Operations.Handlers
 {
     internal class CreateRentalHandler : Handler<CreateRental, RentalEntity>
     {
-        public CreateRentalHandler(DbContext database)
+        public CreateRentalHandler(DatabaseContext database)
             : base(database) { }
 
         protected override async Task<RentalEntity> ExecuteCoreAsync(CreateRental command)

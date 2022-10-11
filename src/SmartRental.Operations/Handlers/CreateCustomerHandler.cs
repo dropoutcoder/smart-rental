@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmartRental.Infrastructure;
 using SmartRental.Infrastructure.Database.ComplexTypes;
 using SmartRental.Infrastructure.Database.Entities;
 using SmartRental.Operations.Abstraction;
@@ -9,7 +10,7 @@ namespace SmartRental.Operations.Handlers
 {
     internal class CreateCustomerHandler : Handler<CreateCustomer, CustomerEntity>
     {
-        public CreateCustomerHandler(DbContext database)
+        public CreateCustomerHandler(DatabaseContext database)
             : base(database) { }
 
         protected override async Task<CustomerEntity> ExecuteCoreAsync(CreateCustomer command)
