@@ -1,4 +1,5 @@
 ﻿using SmartRental.Infrastructure.Database.ComplexTypes;
+using SmartRental.Operations.Enumerations;
 using System.ComponentModel.DataAnnotations;
 
 namespace SmartRental.Operations.Commands
@@ -28,6 +29,18 @@ namespace SmartRental.Operations.Commands
         /// </summary>
         [Required(AllowEmptyStrings = false)]
         public string LicenceNumber { get; set; }
+
+        /// <summary>
+        /// Personal identification document type
+        /// </summary>
+        [Required]
+        public IdentificationType PersonalDocumentType { get; set; }
+
+        /// <summary>
+        /// Personal identification document number
+        /// </summary>
+        [Required]
+        public int PersonalDocumentNumber { get; set; }
 
         /// <summary>
         /// Pickup date and time
