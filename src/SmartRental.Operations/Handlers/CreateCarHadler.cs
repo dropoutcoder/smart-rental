@@ -39,7 +39,7 @@ namespace SmartRental.Operations.Handlers
 
         protected override async Task<bool> ValidateAsync(CreateCar command)
         {
-            var exists = await Context
+            var exists = await Database
                 .Set<CarEntity>()
                 .AnyAsync(c => c.RegistrationNumber == command.RegistrationNumber);
 
