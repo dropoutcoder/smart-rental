@@ -1,4 +1,5 @@
-﻿using SmartRental.Infrastructure.Database.Entities.Abstraction;
+﻿using SmartRental.Infrastructure.Database.ComplexTypes;
+using SmartRental.Infrastructure.Database.Entities.Abstraction;
 
 namespace SmartRental.Infrastructure.Database.Entities
 {
@@ -32,6 +33,11 @@ namespace SmartRental.Infrastructure.Database.Entities
         /// Driving licence number
         /// </summary>
         public string LicenceNumber { get; set; }
+
+        /// <summary>
+        /// Personal identification document
+        /// </summary>
+        public PersonalIdentification PersonalDocument { get; set; }
 
         /// <summary>
         /// Pickup date and time

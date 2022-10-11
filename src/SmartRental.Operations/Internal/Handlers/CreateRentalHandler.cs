@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartRental.Infrastructure;
+using SmartRental.Infrastructure.Database.ComplexTypes;
 using SmartRental.Infrastructure.Database.Entities;
 using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
@@ -23,6 +24,10 @@ namespace SmartRental.Operations.Handlers
                    IsCancelled = false,
                    IsPaid = command.IsPaid,
                    LicenceNumber = command.LicenceNumber,
+                   PersonalDocument = new PersonalIdentification { 
+                       Number = command.PersonalDocumentNumber, 
+                       PersonalIdentificationType = (PersonalIdentification.Type)command.PersonalDocumentType
+                   },
                    PickupDateTime = command.PickupDateTime,
                    Price = command.Price,
                    ReturnDateTime = command.ReturnDateTime,

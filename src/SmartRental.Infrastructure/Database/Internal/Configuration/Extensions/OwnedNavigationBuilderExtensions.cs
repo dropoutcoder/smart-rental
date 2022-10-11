@@ -27,5 +27,23 @@ namespace SmartRental.Infrastructure.Database.Internal.Configuration.Extensions
 
             return builder;
         }
+
+        public static OwnedNavigationBuilder<TEntity, PersonalIdentification> OwnsPersonalDocument<TEntity>(
+            this EntityTypeBuilder<TEntity> parentBuilder
+            , Expression<Func<TEntity, PersonalIdentification>> accessor)
+            where TEntity : class
+        {
+            var builder = parentBuilder.OwnsOne(accessor!);
+
+            builder
+                .Property(pd => pd.Number)
+                .IsRequired();
+
+            builder
+                .Property(pd => pd.PersonalIdentificationType)
+                .IsRequired();
+
+            return builder;
+        }
     }
 }
