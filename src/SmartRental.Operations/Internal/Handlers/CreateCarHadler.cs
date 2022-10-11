@@ -18,6 +18,7 @@ namespace SmartRental.Operations.Handlers
                 .Set<CarEntity>()
                 .AddAsync(new CarEntity
                 {
+                    Id = (await Database.Set<CarEntity>().MaxAsync(c => c.Id)) + 1,
                     Name = command.Name,
                     RegistrationNumber = command.RegistrationNumber,
                 });

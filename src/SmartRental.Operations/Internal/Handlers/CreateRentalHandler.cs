@@ -21,6 +21,7 @@ namespace SmartRental.Operations.Handlers
                {
                    CarId = command.CarId,
                    CustomerId = command.CustomerId,
+                   Id = (await Database.Set<RentalEntity>().MaxAsync(c => c.Id)) + 1,
                    IsCancelled = false,
                    IsPaid = command.IsPaid,
                    LicenceNumber = command.LicenceNumber,

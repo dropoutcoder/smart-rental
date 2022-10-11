@@ -27,6 +27,7 @@ namespace SmartRental.Operations.Handlers
                     },
                     DateOfBirth = command.DateOfBirth,
                     GivenName = command.GivenName,
+                    Id = (await Database.Set<CustomerEntity>().MaxAsync(c => c.Id)) + 1,
                     Surname = command.Surname
                 });
 
