@@ -16,6 +16,8 @@ namespace SmartRental
 
             builder.Services.AddDatabase("SmartRental");
 
+            builder.Services.AddQueries();
+
             builder.Services.AddOperations();
 
             var app = builder.Build();

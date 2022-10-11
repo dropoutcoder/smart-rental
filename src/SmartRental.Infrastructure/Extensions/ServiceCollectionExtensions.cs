@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using SmartRental.Infrastructure.Database.Entities;
 
 namespace SmartRental.Infrastructure.Extensions
 {
@@ -16,6 +17,21 @@ namespace SmartRental.Infrastructure.Extensions
             {
                 options.UseInMemoryDatabase(databaseName ?? "production");
             });
+
+            return services;
+        }
+
+        public static IServiceCollection AddQueries(this IServiceCollection services)
+        {
+            if (services is null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
+
+            services
+                .AddScoped<IQueryable<CarEntity>>(provider => provider.GetRequiredService<DatabaseContext>().Set<CarEntity>())
+                .AddScoped<IQueryable<CustomerEntity>>(provider => provider.GetRequiredService<DatabaseContext>().Set<CustomerEntity>())
+                .AddScoped<IQueryable<RentalEntity>>(provider => provider.GetRequiredService<DatabaseContext>().Set<RentalEntity>());
 
             return services;
         }
