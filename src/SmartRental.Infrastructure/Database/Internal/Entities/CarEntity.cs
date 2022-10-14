@@ -1,11 +1,12 @@
-﻿using SmartRental.Infrastructure.Database.Entities.Abstraction;
+﻿using SmartRental.Infrastructure.Database.Abstraction.Types;
+using SmartRental.Infrastructure.Database.Internal.Entities.Abstraction;
 
-namespace SmartRental.Infrastructure.Database.Entities
+namespace SmartRental.Infrastructure.Database.Internal.Entities
 {
     /// <summary>
     /// Car database entity
     /// </summary>
-    public class CarEntity : DbEntity<int>
+    internal class CarEntity : DbEntity<int>, ICar
     {
         /// <summary>
         /// Car registration plate number

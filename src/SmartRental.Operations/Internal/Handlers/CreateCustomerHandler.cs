@@ -1,49 +1,37 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SmartRental.Infrastructure;
-using SmartRental.Infrastructure.Database.ComplexTypes;
-using SmartRental.Infrastructure.Database.Entities;
+﻿using SmartRental.Infrastructure.Database;
+using SmartRental.Infrastructure.Database.Abstraction;
+using SmartRental.Infrastructure.Database.Abstraction.Types;
 using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
-using System.Diagnostics;
 
 namespace SmartRental.Operations.Handlers
 {
-    internal class CreateCustomerHandler : Handler<CreateCustomer, CustomerEntity>
+    internal class CreateCustomerHandler : Handler<CreateCustomer, ICustomer>
     {
-        public CreateCustomerHandler(DatabaseContext database)
-            : base(database) { }
-
-        protected override async Task<CustomerEntity> ExecuteCoreAsync(CreateCustomer command)
+        public CreateCustomerHandler(ICustomerStore store)
         {
-            var entry = await Database
-                .Set<CustomerEntity>()
-                .AddAsync(new CustomerEntity
-                {
-                    BillingAddress = new Address
-                    {
-                        City = command.City,
-                        PostalCode = command.PostalCode,
-                        Street = command.Street
-                    },
-                    DateOfBirth = command.DateOfBirth,
-                    GivenName = command.GivenName,
-                    Id = (await Database.Set<CustomerEntity>().MaxAsync(c => c.Id)) + 1,
-                    Surname = command.Surname
-                });
+            Store = store ?? throw new ArgumentNullException(nameof(store));
+        }
 
+        public ICustomerStore Store { get; }
+
+        protected override async Task<ICustomer> ExecuteCoreAsync(CreateCustomer command)
+        {
             try
             {
-                var result = await Database
-                    .SaveChangesAsync();
-
-                Debug.Assert(result == 1);
-
-                return entry.Entity;
+                return await Store
+                    .AddCustomerAsync(
+                        command.GivenName,
+                        command.Surname,
+                        command.Street,
+                        command.City,
+                        command.PostalCode,
+                        command.DateOfBirth);
             }
-            catch (DbUpdateException due)
+            catch (StoreException se)
             {
                 // log execution context
-                throw new OperationException(command, "We have encountered issue while trying to save customer to the database.", due);
+                throw new OperationException(command, "We have encountered issue while trying to save customer to the database.", se);
             }
         }
 

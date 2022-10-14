@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SmartRental.Infrastructure.Database.Entities;
+using SmartRental.Infrastructure.Database.Abstraction.Types;
 using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
 
@@ -18,7 +18,7 @@ namespace SmartRental.Controllers
         public ILogger<CustomerController> Logger { get; }
 
         [HttpPost()]
-        public async Task<IActionResult> CreateAsync([FromBody] CreateCustomer command, [FromServices] IHandler<CreateCustomer, CustomerEntity> handler)
+        public async Task<IActionResult> CreateAsync([FromBody] CreateCustomer command, [FromServices] IHandler<CreateCustomer, ICustomer> handler)
         {
             if (!ModelState.IsValid)
             {
@@ -27,11 +27,11 @@ namespace SmartRental.Controllers
 
             var result = await handler.ExecuteAsync(command);
 
-            return Created($"api/customer/{result.Id}", null);
+            return Created($"api/customer/{result.Id}", result);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync([FromRoute] int id, [FromServices] IQueryable<CustomerEntity> customers)
+        public async Task<IActionResult> GetAsync([FromRoute] int id, [FromServices] IQueryable<ICustomer> customers)
         {
 
             var result = await customers.SingleOrDefaultAsync(c => c.Id == id);
@@ -40,7 +40,7 @@ namespace SmartRental.Controllers
         }
 
         [HttpGet()]
-        public async Task<IActionResult> ListAsync([FromServices] IQueryable<CustomerEntity> customers)
+        public async Task<IActionResult> ListAsync([FromServices] IQueryable<ICustomer> customers)
         {
             var result = await customers.ToListAsync();
 

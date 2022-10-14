@@ -40,7 +40,7 @@ namespace SmartRental.Infrastructure.Database.Internal.Configuration.Extensions
                 .IsRequired();
 
             builder
-                .Property(pd => pd.PersonalIdentificationType)
+                .Property(pd => pd.Type)
                 .IsRequired();
 
             return builder;

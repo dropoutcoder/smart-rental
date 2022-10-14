@@ -1,63 +1,58 @@
-﻿using System.ComponentModel.DataAnnotations;
-using static SmartRental.Infrastructure.Database.ComplexTypes.PersonalIdentification;
+﻿using SmartRental.Infrastructure.Database.Abstraction.Types;
+using SmartRental.Infrastructure.Database.ComplexTypes;
+using SmartRental.Infrastructure.Database.Internal.Entities.Abstraction;
 
-namespace SmartRental.Operations.Commands
+namespace SmartRental.Infrastructure.Database.Internal.Entities
 {
-    public class CreateRental
+    /// <summary>
+    /// Defines rental database entity
+    /// </summary>
+    internal class RentalEntity : DbEntity<int>, IRental
     {
+
         /// <summary>
         /// Rental car reference identifier
         /// </summary>
-        [Required]
         public int CarId { get; set; }
 
         /// <summary>
         /// Rental customer reference identifier
         /// </summary>
-        [Required]
         public int CustomerId { get; set; }
 
         /// <summary>
-        /// Flag indicating price of the rental was already settled
+        /// Flag indicating rental price was settled
         /// </summary>
-        [Required]
         public bool IsPaid { get; set; }
+
+        /// <summary>
+        /// Flag indicating rental was cancelled
+        /// </summary>
+        public bool IsCancelled { get; set; }
 
         /// <summary>
         /// Driving licence number
         /// </summary>
-        [Required(AllowEmptyStrings = false)]
         public string LicenceNumber { get; set; }
 
         /// <summary>
-        /// Personal identification document type
+        /// Personal identification document
         /// </summary>
-        [Required]
-        public IdentificationType PersonalDocumentType { get; set; }
-
-        /// <summary>
-        /// Personal identification document number
-        /// </summary>
-        [Required]
-        public int PersonalDocumentNumber { get; set; }
+        public PersonalIdentification PersonalDocument { get; set; }
 
         /// <summary>
         /// Pickup date and time
         /// </summary>
-        [Required]
         public DateTime PickupDateTime { get; set; }
 
         /// <summary>
         /// Total price of the rental
         /// </summary>
-        [Required]
-        [Range(0, Int32.MaxValue)]
         public decimal Price { get; set; }
 
         /// <summary>
         /// Return date and time
         /// </summary>
-        [Required]
         public DateTime ReturnDateTime { get; set; }
     }
 }

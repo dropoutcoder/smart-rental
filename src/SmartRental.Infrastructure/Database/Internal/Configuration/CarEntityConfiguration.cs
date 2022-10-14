@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SmartRental.Infrastructure.Database.Entities;
-using SmartRental.Infrastructure.Database.Entities.Abstraction;
+using SmartRental.Infrastructure.Database.Internal.Entities;
+using SmartRental.Infrastructure.Database.Internal.Entities.Abstraction;
 
 namespace SmartRental.Infrastructure.Database.Internal.Configuration
 {
@@ -19,18 +19,6 @@ namespace SmartRental.Infrastructure.Database.Internal.Configuration
             builder
                 .Property(ce => ce.RegistrationNumber)
                 .IsRequired();
-
-            builder.HasData(new CarEntity
-            {
-                Id = 1,
-                Name = "Skoda Fabia",
-                RegistrationNumber = "ABC1111"
-            }, new CarEntity
-            {
-                Id = 2,
-                Name = "Opel Corsa",
-                RegistrationNumber = "CRS2222"
-            });
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SmartRental.Infrastructure.Database.Entities;
-using SmartRental.Infrastructure.Database.Entities.Abstraction;
 using SmartRental.Infrastructure.Database.Internal.Configuration.Extensions;
+using SmartRental.Infrastructure.Database.Internal.Entities;
+using SmartRental.Infrastructure.Database.Internal.Entities.Abstraction;
 
 namespace SmartRental.Infrastructure.Database.Internal.Configuration
 {
@@ -14,7 +14,7 @@ namespace SmartRental.Infrastructure.Database.Internal.Configuration
                 .HasBaseType<DbEntity<int>>();
 
             builder
-                .OwnsAddress(ce => ce.BillingAddress);
+                .OwnsAddress(ce => ce.Address);
 
             builder
                 .Property(ce => ce.DateOfBirth)
@@ -27,21 +27,6 @@ namespace SmartRental.Infrastructure.Database.Internal.Configuration
             builder
                 .Property(ce => ce.Surname)
                 .IsRequired();
-
-            builder
-                .HasData(new CustomerEntity
-                {
-                    BillingAddress = new ComplexTypes.Address
-                    {
-                        City = "Marsaskala",
-                        PostalCode = "MSK 4070",
-                        Street = "Triq Il-Btieti"
-                    },
-                    DateOfBirth = DateTime.UtcNow.Date.AddYears(40),
-                    GivenName = "Petr",
-                    Surname = "Sramek",
-                    Id = 1
-                });
         }
     }
 }

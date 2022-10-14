@@ -1,12 +1,13 @@
-﻿using SmartRental.Infrastructure.Database.ComplexTypes;
-using SmartRental.Infrastructure.Database.Entities.Abstraction;
+﻿using SmartRental.Infrastructure.Database.Abstraction.Types;
+using SmartRental.Infrastructure.Database.ComplexTypes;
+using SmartRental.Infrastructure.Database.Internal.Entities.Abstraction;
 
-namespace SmartRental.Infrastructure.Database.Entities
+namespace SmartRental.Infrastructure.Database.Internal.Entities
 {
     /// <summary>
     /// Customer database entity
     /// </summary>
-    public class CustomerEntity : DbEntity<int>
+    internal class CustomerEntity : DbEntity<int>, ICustomer
     {
         /// <summary>
         /// Customer's single given name, or multiple given names separated by space character
@@ -19,9 +20,9 @@ namespace SmartRental.Infrastructure.Database.Entities
         public string Surname { get; set; }
 
         /// <summary>
-        /// Current customer's billing address
+        /// Current customer's address
         /// </summary>
-        public Address BillingAddress { get; set; }
+        public Address Address { get; set; }
 
         /// <summary>
         /// Customer's birthdate

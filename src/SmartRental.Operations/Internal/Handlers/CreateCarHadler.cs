@@ -1,48 +1,39 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SmartRental.Infrastructure;
-using SmartRental.Infrastructure.Database.Entities;
+using SmartRental.Infrastructure.Database;
+using SmartRental.Infrastructure.Database.Abstraction;
+using SmartRental.Infrastructure.Database.Abstraction.Types;
 using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
-using System.Diagnostics;
 
 namespace SmartRental.Operations.Handlers
 {
-    internal class CreateCarHadler : Handler<CreateCar, CarEntity>
+    internal class CreateCarHadler : Handler<CreateCar, ICar>
     {
-        public CreateCarHadler(DatabaseContext database)
-            : base(database) { }
-
-        protected override async Task<CarEntity> ExecuteCoreAsync(CreateCar command)
+        public CreateCarHadler(ICarStore store)
         {
-            var entry = await Database
-                .Set<CarEntity>()
-                .AddAsync(new CarEntity
-                {
-                    Id = (await Database.Set<CarEntity>().MaxAsync(c => c.Id)) + 1,
-                    Name = command.Name,
-                    RegistrationNumber = command.RegistrationNumber,
-                });
+            Store = store ?? throw new ArgumentNullException(nameof(store));
+        }
 
+        public ICarStore Store { get; }
+
+        protected override async Task<ICar> ExecuteCoreAsync(CreateCar command)
+        {
             try
             {
-                var result = await Database
-                    .SaveChangesAsync();
-
-                Debug.Assert(result == 1);
-
-                return entry.Entity;
+                return await Store
+                    .AddCarAsync(command.RegistrationNumber, command.Name);
             }
-            catch (DbUpdateException due)
+            catch (StoreException se)
             {
-                // log execution context
-                throw new OperationException(command, "We have encountered issue while trying to save car to the database.", due);
+                // log and rethrow
+                throw new OperationException(command, "We have encountered issue while trying to save car to the database.", se);
             }
         }
 
         protected override async Task<bool> ValidateAsync(CreateCar command)
         {
-            var exists = await Database
-                .Set<CarEntity>()
+            var exists = await Store
+                .Query
                 .AnyAsync(c => c.RegistrationNumber == command.RegistrationNumber);
 
             return !exists;

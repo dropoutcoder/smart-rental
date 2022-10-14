@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SmartRental.Infrastructure.Database.Entities;
+using SmartRental.Infrastructure.Database.Abstraction.Types;
 using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
 using SmartRental.Operations.Handlers;
@@ -16,10 +16,10 @@ namespace SmartRental.Infrastructure.Extensions
             }
 
             services
-                .AddScoped<IHandler<CreateCar, CarEntity>, CreateCarHadler>()
-                .AddScoped<IHandler<CreateCustomer, CustomerEntity>, CreateCustomerHandler>()
-                .AddScoped<IHandler<CreateRental, RentalEntity>, CreateRentalHandler>()
-                .AddScoped<IHandler<CancelRental, RentalEntity>, CancelRentalHandler>();
+                .AddScoped<IHandler<CreateCar, ICar>, CreateCarHadler>()
+                .AddScoped<IHandler<CreateCustomer, ICustomer>, CreateCustomerHandler>()
+                .AddScoped<IHandler<CreateRental, IRental>, CreateRentalHandler>()
+                .AddScoped<IHandler<CancelRental, bool>, CancelRentalHandler>();
 
             return services;
         }

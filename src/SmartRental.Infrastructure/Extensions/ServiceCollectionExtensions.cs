@@ -1,6 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using SmartRental.Infrastructure.Database.Entities;
+using SmartRental.Infrastructure.Database.Abstraction;
+using SmartRental.Infrastructure.Database.Abstraction.Types;
+using SmartRental.Infrastructure.Database.Internal.Entities;
+using SmartRental.Infrastructure.Database.Internal.Services;
+using SmartRental.Infrastructure.Database.Internal.Stores;
+using System.Linq;
 
 namespace SmartRental.Infrastructure.Extensions
 {
@@ -13,25 +18,20 @@ namespace SmartRental.Infrastructure.Extensions
                 throw new ArgumentNullException(nameof(services));
             }
 
-            services.AddDbContext<DatabaseContext>(options =>
-            {
-                options.UseInMemoryDatabase(databaseName ?? "production");
-            });
-
-            return services;
-        }
-
-        public static IServiceCollection AddQueries(this IServiceCollection services)
-        {
-            if (services is null)
-            {
-                throw new ArgumentNullException(nameof(services));
-            }
-
             services
-                .AddScoped<IQueryable<CarEntity>>(provider => provider.GetRequiredService<DatabaseContext>().Set<CarEntity>())
-                .AddScoped<IQueryable<CustomerEntity>>(provider => provider.GetRequiredService<DatabaseContext>().Set<CustomerEntity>())
-                .AddScoped<IQueryable<RentalEntity>>(provider => provider.GetRequiredService<DatabaseContext>().Set<RentalEntity>());
+                .AddScoped<IIdProvider<CarEntity>, IdProvider<CarEntity>>()
+                .AddScoped<IIdProvider<CustomerEntity>, IdProvider<CustomerEntity>>()
+                .AddScoped<IIdProvider<RentalEntity>, IdProvider<RentalEntity>>()
+                .AddScoped<IQueryable<ICar>>(provider => provider.GetRequiredService<DatabaseContext>().Set<CarEntity>().Cast<ICar>())
+                .AddScoped<IQueryable<ICustomer>>(provider => provider.GetRequiredService<DatabaseContext>().Set<CustomerEntity>().Cast<ICustomer>())
+                .AddScoped<IQueryable<IRental>>(provider => provider.GetRequiredService<DatabaseContext>().Set<RentalEntity>().Cast<IRental>())
+                .AddScoped<ICarStore, CarStore>()
+                .AddScoped<ICustomerStore, CustomerStore>()
+                .AddScoped<IRentalStore, RentalStore>()
+                .AddDbContext<DatabaseContext>(options =>
+                {
+                    options.UseInMemoryDatabase(databaseName ?? "production");
+                });
 
             return services;
         }

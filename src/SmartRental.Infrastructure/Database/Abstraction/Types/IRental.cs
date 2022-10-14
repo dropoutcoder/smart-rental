@@ -1,13 +1,13 @@
 ﻿using SmartRental.Infrastructure.Database.ComplexTypes;
-using SmartRental.Infrastructure.Database.Entities.Abstraction;
 
-namespace SmartRental.Infrastructure.Database.Entities
+namespace SmartRental.Infrastructure.Database.Abstraction.Types
 {
-    /// <summary>
-    /// Defines rental database entity
-    /// </summary>
-    public class RentalEntity : DbEntity<int>
+    public interface IRental
     {
+        /// <summary>
+        /// Rental identifier
+        /// </summary>
+        public int Id { get; }
 
         /// <summary>
         /// Rental car reference identifier
@@ -18,11 +18,6 @@ namespace SmartRental.Infrastructure.Database.Entities
         /// Rental customer reference identifier
         /// </summary>
         public int CustomerId { get; set; }
-
-        /// <summary>
-        /// Flag indicating rental price was settled
-        /// </summary>
-        public bool IsPaid { get; set; }
 
         /// <summary>
         /// Flag indicating rental was cancelled
@@ -53,5 +48,7 @@ namespace SmartRental.Infrastructure.Database.Entities
         /// Return date and time
         /// </summary>
         public DateTime ReturnDateTime { get; set; }
+
+
     }
 }

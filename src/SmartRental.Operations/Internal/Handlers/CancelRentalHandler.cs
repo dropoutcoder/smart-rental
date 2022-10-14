@@ -1,48 +1,42 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartRental.Infrastructure;
-using SmartRental.Infrastructure.Database.Entities;
+using SmartRental.Infrastructure.Database;
+using SmartRental.Infrastructure.Database.Abstraction;
+using SmartRental.Infrastructure.Database.Abstraction.Types;
+using SmartRental.Infrastructure.Database.ComplexTypes;
 using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
 using System.Diagnostics;
 
 namespace SmartRental.Operations.Handlers
 {
-    internal class CancelRentalHandler : Handler<CancelRental, RentalEntity>
+    internal class CancelRentalHandler : Handler<CancelRental, bool>
     {
-        public CancelRentalHandler(DatabaseContext database)
-            : base(database) { }
-
-        protected override async Task<RentalEntity> ExecuteCoreAsync(CancelRental command)
+        public CancelRentalHandler(IRentalStore store)
         {
-            var entry = Database
-                .Set<RentalEntity>()
-                .Attach(new RentalEntity
-                {
-                    Id = command.RentalId
-                });
+            Store = store ?? throw new ArgumentNullException(nameof(store));
+        }
 
-            entry.Entity.IsCancelled = true;
+        public IRentalStore Store { get; }
 
+        protected override async Task<bool> ExecuteCoreAsync(CancelRental command)
+        {
             try
             {
-                var result = await Database
-                    .SaveChangesAsync();
-
-                Debug.Assert(result == 1);
-
-                return entry.Entity;
+                return await Store
+                    .CancelRental(command.RentalId);
             }
-            catch (DbUpdateException due)
+            catch (StoreException se)
             {
                 // log execution context
-                throw new OperationException(command, "We have encountered issue while trying to cancel rental.", due);
+                throw new OperationException(command, "We have encountered issue while trying to cancel rental.", se);
             }
         }
 
         protected override async Task<bool> ValidateAsync(CancelRental command)
         {
-            var exists = await Database
-                .Set<RentalEntity>()
+            var exists = await Store
+                .Query
                 .AnyAsync(c => c.Id == command.RentalId && !c.IsCancelled);
 
             return exists;

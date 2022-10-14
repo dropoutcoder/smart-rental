@@ -1,69 +1,62 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartRental.Infrastructure;
+using SmartRental.Infrastructure.Database;
+using SmartRental.Infrastructure.Database.Abstraction;
+using SmartRental.Infrastructure.Database.Abstraction.Types;
 using SmartRental.Infrastructure.Database.ComplexTypes;
-using SmartRental.Infrastructure.Database.Entities;
+using SmartRental.Infrastructure.Database.Internal.Entities;
 using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
 using System.Diagnostics;
 
 namespace SmartRental.Operations.Handlers
 {
-    internal class CreateRentalHandler : Handler<CreateRental, RentalEntity>
+    internal class CreateRentalHandler : Handler<CreateRental, IRental>
     {
-        public CreateRentalHandler(DatabaseContext database)
-            : base(database) { }
-
-        protected override async Task<RentalEntity> ExecuteCoreAsync(CreateRental command)
+        public CreateRentalHandler(IRentalStore store, IQueryable<ICar> cars, IQueryable<ICustomer> customers)
         {
-            var entry = await Database
-               .Set<RentalEntity>()
-               .AddAsync(new RentalEntity
-               {
-                   CarId = command.CarId,
-                   CustomerId = command.CustomerId,
-                   Id = (await Database.Set<RentalEntity>().MaxAsync(c => c.Id)) + 1,
-                   IsCancelled = false,
-                   IsPaid = command.IsPaid,
-                   LicenceNumber = command.LicenceNumber,
-                   PersonalDocument = new PersonalIdentification
-                   {
-                       Number = command.PersonalDocumentNumber,
-                       PersonalIdentificationType = (PersonalIdentification.Type)command.PersonalDocumentType
-                   },
-                   PickupDateTime = command.PickupDateTime,
-                   Price = command.Price,
-                   ReturnDateTime = command.ReturnDateTime,
-               });
+            Store = store ?? throw new ArgumentNullException(nameof(store));
+            Cars = cars ?? throw new ArgumentNullException(nameof(cars));
+            Customers = customers ?? throw new ArgumentNullException(nameof(customers));
+        }
 
+        public IRentalStore Store { get; }
+        public IQueryable<ICar> Cars { get; }
+        public IQueryable<ICustomer> Customers { get; }
+
+        protected override async Task<IRental> ExecuteCoreAsync(CreateRental command)
+        {
             try
             {
-                var result = await Database
-                    .SaveChangesAsync();
-
-                Debug.Assert(result == 1);
-
-                return entry.Entity;
+                return await Store
+                    .AddRentalAsync(
+                        command.CarId,
+                        command.CustomerId,
+                        command.LicenceNumber,
+                        PersonalIdentification.Create(command.PersonalDocumentNumber, command.PersonalDocumentType),
+                        command.PickupDateTime,
+                        command.ReturnDateTime,
+                        command.Price
+                        );
             }
-            catch (DbUpdateException due)
+            catch (StoreException se)
             {
-                // log execution context
-                throw new OperationException(command, "We have encountered issue while trying to save customer to the database.", due);
+                // log and rethrow
+                throw new OperationException(command, "We have encountered issue while trying to save rental to the database.", se);
             }
         }
 
         protected override async Task<bool> ValidateAsync(CreateRental command)
         {
-            if (command.PickupDateTime.AddDays(1).Date <= command.ReturnDateTime.Date)
+            if (command.PickupDateTime.AddDays(1).Date >= command.ReturnDateTime.Date)
             {
                 return false;
             }
 
-            var customerExists = await Database
-                .Set<CustomerEntity>()
+            var customerExists = await Customers
                 .AnyAsync(c => c.Id == command.CustomerId);
 
-            var carExists = await Database
-                .Set<CarEntity>()
+            var carExists = await Cars
                 .AnyAsync(c => c.Id == command.CarId);
 
             return customerExists && carExists;
