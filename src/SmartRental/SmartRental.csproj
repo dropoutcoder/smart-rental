@@ -15,6 +15,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.9" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.8.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -25,8 +29,47 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\components\CarTable.tsx" />
+    <None Remove="ClientApp\src\components\CreateCarForm.tsx" />
+    <None Remove="ClientApp\src\components\CreateCustomerForm.tsx" />
+    <None Remove="ClientApp\src\components\CreateRentalForm.tsx" />
+    <None Remove="ClientApp\src\components\CustomerTable.tsx" />
+    <None Remove="ClientApp\src\components\RentalTable.tsx" />
+    <None Remove="ClientApp\src\http\data\IAddress.tsx" />
+    <None Remove="ClientApp\src\http\data\ICar.tsx" />
+    <None Remove="ClientApp\src\http\ApiClient.tsx" />
+    <None Remove="ClientApp\src\http\data\ICustomer.tsx" />
+    <None Remove="ClientApp\src\http\data\IPersonalIdentification.tsx" />
+    <None Remove="ClientApp\src\http\data\IRental.tsx" />
+    <None Remove="ClientApp\src\http\inputs\ICreateCar.tsx" />
+    <None Remove="ClientApp\src\http\inputs\ICreateCustomer.tsx" />
+    <None Remove="ClientApp\src\http\inputs\ICreateRental.tsx" />
+    <None Remove="ClientApp\src\http\shared\IdentificationType.tsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\src\pages\CustomersPage.tsx" />
+    <TypeScriptCompile Remove="ClientApp\src\pages\RentalsPage.tsx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SmartRental.Infrastructure\SmartRental.Infrastructure.csproj" />
     <ProjectReference Include="..\SmartRental.Operations\SmartRental.Operations.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Update="ClientApp\src\components\CreateCustomerForm.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Update="ClientApp\src\components\CreateRentalForm.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Update="ClientApp\src\components\CustomerTable.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Update="ClientApp\src\components\RentalTable.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
