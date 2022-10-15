@@ -22,10 +22,6 @@ namespace SmartRental.Infrastructure.Database.Internal.Configuration
                 .IsRequired();
 
             builder
-                .Property(re => re.IsPaid)
-                .IsRequired();
-
-            builder
                 .Property(re => re.LicenceNumber)
                 .IsRequired();
 

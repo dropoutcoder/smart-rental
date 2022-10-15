@@ -9,7 +9,6 @@ export class CarsPage extends Component<{}, { cars: Array<ICar>, loading: boolea
     static displayName = CarsPage.name;
 
     state = { cars: [] as Array<ICar>, loading: true };
-    client = new ApiClient();
 
     componentDidMount() {
         this.loadCars();
@@ -41,7 +40,7 @@ export class CarsPage extends Component<{}, { cars: Array<ICar>, loading: boolea
     }
 
     async loadCars() {
-        await this.client.getCars()
+        await ApiClient.getCars()
             .then(data => this.setState({ cars: data, loading: false }))
             .catch(error => alert(error));
     }

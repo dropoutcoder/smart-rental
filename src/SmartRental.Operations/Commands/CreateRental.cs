@@ -18,12 +18,6 @@ namespace SmartRental.Operations.Commands
         public int CustomerId { get; set; }
 
         /// <summary>
-        /// Flag indicating price of the rental was already settled
-        /// </summary>
-        [Required]
-        public bool IsPaid { get; set; }
-
-        /// <summary>
         /// Driving licence number
         /// </summary>
         [Required(AllowEmptyStrings = false)]

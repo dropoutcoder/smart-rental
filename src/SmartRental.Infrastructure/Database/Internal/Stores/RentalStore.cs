@@ -76,6 +76,8 @@ namespace SmartRental.Infrastructure.Database.Internal.Stores
                     Id = rentalId
                 });
 
+            entry.Entity.IsCancelled = true;
+
             try
             {
                 var result = await DbContext

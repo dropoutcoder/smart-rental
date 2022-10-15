@@ -9,7 +9,6 @@ export class CustomersPage extends Component<{}, { items: Array<ICustomer>, load
     static displayName = CustomersPage.name;
 
     state = { items: [] as Array<ICustomer>, loading: true };
-    client = new ApiClient();
 
     componentDidMount() {
         this.loadCustomers();
@@ -41,7 +40,7 @@ export class CustomersPage extends Component<{}, { items: Array<ICustomer>, load
     }
 
     async loadCustomers() {
-        await this.client.getCustomers()
+        await ApiClient.getCustomers()
             .then(data => this.setState({ items: data, loading: false }))
             .catch(error => alert(error));
     }

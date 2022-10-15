@@ -7,16 +7,15 @@ import CreateRentalForm from '../components/CreateRentalForm';
 import ICustomer from '../http/data/ICustomer';
 import ICar from '../http/data/ICar';
 
-export class RentalsPage extends Component<{}, { items: Array<IRental>, cars: Array<ICar>, customers: Array<ICustomer>, loading: boolean }> {
+export class RentalsPage extends Component<{}, { rentals: Array<IRental>, cars: Array<ICar>, customers: Array<ICustomer>, loading: boolean }> {
     static displayName = RentalsPage.name;
 
     state = {
-        items: [] as Array<IRental>,
+        rentals: [] as Array<IRental>,
         cars: [] as Array<ICar>,
         customers: [] as Array<ICustomer>,
         loading: true
     };
-    client = new ApiClient();
 
     componentDidMount() {
         this.loadCars();
@@ -27,7 +26,7 @@ export class RentalsPage extends Component<{}, { items: Array<IRental>, cars: Ar
     render() {
         let table = this.state.loading
             ? <p><em>Loading...</em></p>
-            : <RentalTable items={this.state.items}></RentalTable>
+            : <RentalTable items={this.state.rentals} onCancelRequested={(id) => this.cancelRental(id)}></RentalTable>
 
         return (
             <Container>
@@ -40,30 +39,53 @@ export class RentalsPage extends Component<{}, { items: Array<IRental>, cars: Ar
 
     addRental(value: IRental): void {
         this.setState(state => {
-            const items = [...state.items, value];
+            const rentals = [...state.rentals, value];
 
             return {
-                items,
+                rentals,
                 loading: state.loading,
             };
         });
     }
 
     async loadRentals() {
-        await this.client.getRentals()
-            .then(data => this.setState({ items: data, loading: false }))
+        await ApiClient.getRentals()
+            .then(data => this.setState({ rentals: data, loading: false }))
             .catch(error => alert(error));
     }
 
     async loadCars() {
-        await this.client.getCars()
+        await ApiClient.getCars()
             .then(data => this.setState({ cars: data }))
             .catch(error => alert(error));
     }
 
     async loadCustomers() {
-        await this.client.getCustomers()
+        await ApiClient.getCustomers()
             .then(data => this.setState({ customers: data }))
+            .catch(error => alert(error));
+    }
+
+    async cancelRental(id: number) {
+        await ApiClient.cancelRental({ rentalId: id })
+            .then(data => {
+                if (data === true) {
+                    this.setState(state => {
+                        let rentals = state.rentals.map(r => {
+                            if (r.id === id) {
+                                r.isCancelled = true;
+                            }
+
+                            return r;
+                        })
+
+                        return {
+                            rentals,
+                            loading: state.loading,
+                        };
+                    })
+                }
+            })
             .catch(error => alert(error));
     }
 }

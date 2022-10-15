@@ -12,8 +12,6 @@ export default class CreateCarForm extends Component<{ onCreated: (value: ICar) 
 
     state = CreateCarForm.defaultState;
 
-    client = new ApiClient();
-
     handleNameChange(event: ChangeEvent<HTMLInputElement>): void {
         this.setState({
             name: event.target.value
@@ -29,7 +27,7 @@ export default class CreateCarForm extends Component<{ onCreated: (value: ICar) 
     handleSubmit(event: FormEvent<HTMLFormElement>): void {
         event.preventDefault();
 
-        this.client.createCar(this.state)
+        ApiClient.createCar(this.state)
             .then(value => {
                 console.log(JSON.stringify(value));
                 this.props.onCreated(value);

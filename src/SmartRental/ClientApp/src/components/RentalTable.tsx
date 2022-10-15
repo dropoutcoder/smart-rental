@@ -1,10 +1,12 @@
-﻿import IRental from "../http/data/IRental"
+﻿import { Button } from "reactstrap"
+import IRental from "../http/data/IRental"
 
 type RentalTableProps = {
-    items: IRental[]
+    items: IRental[],
+    onCancelRequested: (id: number) => void
 }
 
-export const RentalTable = ({ items }: RentalTableProps) => 
+export const RentalTable = ({ items, onCancelRequested }: RentalTableProps) => 
     <table className='table table-striped'>
         <thead>
             <tr>
@@ -24,7 +26,7 @@ export const RentalTable = ({ items }: RentalTableProps) =>
                         <td>{item.pickupDateTime.toString()}</td>
                         <td>{item.returnDateTime.toString()}</td>
                         <td>{item.price}</td>
-                        <td></td>
+                        <td><Button disabled={item.isCancelled} active={!item.isCancelled} color="danger" type="button" onClick={() => onCancelRequested(item.id)}>Cancel</Button></td>
                     </tr>
                 )}
         </tbody>

@@ -1,12 +1,12 @@
 ﻿import { IdentificationType } from "../shared/IdentificationType";
 
 export default interface ICreateRental {
-    carId: number | null;
-    customerId: number | null;
+    carId: number | undefined;
+    customerId: number | undefined;
     licenceNumber: string;
-    personalDocumentType: IdentificationType | null;
-    personalDocumentNumber: number | null;
+    personalDocumentType: IdentificationType | undefined;
+    personalDocumentNumber: number | undefined;
     pickupDateTime: string;
-    price: number | null;
+    price: number | undefined;
     returnDateTime: string;
 }

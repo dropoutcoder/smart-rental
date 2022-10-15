@@ -21,11 +21,6 @@ namespace SmartRental.Infrastructure.Database.Internal.Entities
         public int CustomerId { get; set; }
 
         /// <summary>
-        /// Flag indicating rental price was settled
-        /// </summary>
-        public bool IsPaid { get; set; }
-
-        /// <summary>
         /// Flag indicating rental was cancelled
         /// </summary>
         public bool IsCancelled { get; set; }

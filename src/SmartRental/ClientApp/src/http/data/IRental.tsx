@@ -4,7 +4,6 @@ export default interface IRental {
     id: number;
     carId: number;
     customerId: number;
-    isPaid: boolean;
     isCancelled: boolean;
     licenceNumber: string;
     personalDocument: IPersonalIdentification;

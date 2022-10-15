@@ -16,8 +16,6 @@ export default class CreateCustomerForm extends Component<{ onCreated: (value: I
 
     state = CreateCustomerForm.defaultState;
 
-    client = new ApiClient();
-
     handleNameChange(event: ChangeEvent<HTMLInputElement>): void {
         this.setState({
             givenName: event.target.value
@@ -57,7 +55,7 @@ export default class CreateCustomerForm extends Component<{ onCreated: (value: I
     handleSubmit(event: FormEvent<HTMLFormElement>): void {
         event.preventDefault();
 
-        this.client.createCustomer(this.state)
+        ApiClient.createCustomer(this.state)
             .then(value => {
                 console.log(JSON.stringify(value));
                 this.props.onCreated(value);

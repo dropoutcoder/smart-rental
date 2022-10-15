@@ -41,6 +41,7 @@
     <None Remove="ClientApp\src\http\data\ICustomer.tsx" />
     <None Remove="ClientApp\src\http\data\IPersonalIdentification.tsx" />
     <None Remove="ClientApp\src\http\data\IRental.tsx" />
+    <None Remove="ClientApp\src\http\inputs\ICancelRental.tsx" />
     <None Remove="ClientApp\src\http\inputs\ICreateCar.tsx" />
     <None Remove="ClientApp\src\http\inputs\ICreateCustomer.tsx" />
     <None Remove="ClientApp\src\http\inputs\ICreateRental.tsx" />

@@ -30,15 +30,15 @@ namespace SmartRental.Controllers
             return Created($"api/customer/{result.Id}", result);
         }
 
-        [HttpPatch("{id}/cancel")]
-        public async Task<IActionResult> CancelAsync([FromRoute] int id, [FromServices] IHandler<CancelRental, bool> handler)
+        [HttpPatch("cancel")]
+        public async Task<IActionResult> CancelAsync([FromBody] CancelRental command, [FromServices] IHandler<CancelRental, bool> handler)
         {
             if (!ModelState.IsValid)
             {
                 return ValidationProblem(ModelState);
             }
 
-            var result = await handler.ExecuteAsync(new CancelRental { RentalId = id });
+            var result = await handler.ExecuteAsync(command);
 
             return Ok(result);
         }
