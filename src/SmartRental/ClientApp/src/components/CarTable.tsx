@@ -9,8 +9,8 @@ export const CarTable = ({ items }: CarTableProps) =>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Registration Number</th>
                 <th>Name</th>
+                <th>Registration Number</th>
             </tr>
         </thead>
         <tbody>
@@ -19,8 +19,8 @@ export const CarTable = ({ items }: CarTableProps) =>
                 : items.map(item =>
                     <tr key={item.id}>
                         <td>{item.id}</td>
-                        <td>{item.registrationNumber}</td>
                         <td>{item.name}</td>
+                        <td>{item.registrationNumber}</td>
                     </tr>
                 )}
         </tbody>
