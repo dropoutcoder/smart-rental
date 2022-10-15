@@ -1,7 +1,8 @@
 
 using SmartRental.Diagnostics;
-using SmartRental.Hosting;
 using SmartRental.Infrastructure.Extensions;
+using SmartRental.Operations.Extensions;
+using SmartRental.Services;
 
 namespace SmartRental
 {
@@ -19,7 +20,7 @@ namespace SmartRental
 
             builder.Services.AddOperations();
 
-            builder.Services.AddHostedService<DataSeedHostingService>();
+            builder.Services.AddHostedService<InitializeDatabaseHostingService>();
 
             var app = builder.Build();
 

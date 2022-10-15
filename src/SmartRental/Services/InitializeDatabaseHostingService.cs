@@ -3,11 +3,11 @@ using SmartRental.Infrastructure.Database.Abstraction;
 using SmartRental.Infrastructure.Database.ComplexTypes;
 using SmartRental.Infrastructure.Database.Internal.Entities;
 
-namespace SmartRental.Hosting
+namespace SmartRental.Services
 {
-    public class DataSeedHostingService : IHostedService
+    public class InitializeDatabaseHostingService : IHostedService
     {
-        public DataSeedHostingService(IServiceProvider provider)
+        public InitializeDatabaseHostingService(IServiceProvider provider)
         {
             Provider = provider ?? throw new ArgumentNullException(nameof(provider));
         }
@@ -16,7 +16,8 @@ namespace SmartRental.Hosting
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            using (var scope = Provider.CreateScope()) {
+            using (var scope = Provider.CreateScope())
+            {
                 var store = scope.ServiceProvider.GetRequiredService<ICarStore>();
                 await store.AddCarAsync("SKODA1", "Skoda Fabia");
             }
