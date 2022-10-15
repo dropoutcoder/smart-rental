@@ -2,9 +2,9 @@
 using SmartRental.Infrastructure.Database.Abstraction.Types;
 using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
-using SmartRental.Operations.Handlers;
+using SmartRental.Operations.Internal.Handlers;
 
-namespace SmartRental.Infrastructure.Extensions
+namespace SmartRental.Operations.Extensions
 {
     public static class ServiceCollectionExtensions
     {

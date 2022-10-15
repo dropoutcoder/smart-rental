@@ -4,7 +4,7 @@ using SmartRental.Infrastructure.Database.Abstraction.Types;
 using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
 
-namespace SmartRental.Operations.Handlers
+namespace SmartRental.Operations.Internal.Handlers
 {
     internal class CreateCustomerHandler : Handler<CreateCustomer, ICustomer>
     {

@@ -9,7 +9,7 @@ using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
 using System.Diagnostics;
 
-namespace SmartRental.Operations.Handlers
+namespace SmartRental.Operations.Internal.Handlers
 {
     internal class CreateRentalHandler : Handler<CreateRental, IRental>
     {
