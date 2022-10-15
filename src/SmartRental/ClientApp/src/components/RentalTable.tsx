@@ -26,7 +26,7 @@ export const RentalTable = ({ items, onCancelRequested }: RentalTableProps) =>
                         <td>{item.pickupDateTime.toString()}</td>
                         <td>{item.returnDateTime.toString()}</td>
                         <td>{item.price}</td>
-                        <td><Button disabled={item.isCancelled} active={!item.isCancelled} color="danger" type="button" onClick={() => onCancelRequested(item.id)}>Cancel</Button></td>
+                        <td><Button disabled={item.isCancelled} active={!item.isCancelled} color={item.isCancelled ? 'secondary' : 'danger'} type="button" onClick={() => onCancelRequested(item.id)}>{item.isCancelled ? 'Cancelled' : 'Cancel'}</Button></td>
                     </tr>
                 )}
         </tbody>
