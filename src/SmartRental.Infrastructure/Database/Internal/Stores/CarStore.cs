@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartRental.Infrastructure.Database.Abstraction;
 using SmartRental.Infrastructure.Database.Abstraction.Types;
-using SmartRental.Infrastructure.Database.Internal.Services;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using System.Diagnostics;
 using SmartRental.Infrastructure.Database.Internal.Entities;
+using SmartRental.Infrastructure.Database.Internal.Services;
+using System.Diagnostics;
 
 namespace SmartRental.Infrastructure.Database.Internal.Stores
 {
@@ -33,10 +32,10 @@ namespace SmartRental.Infrastructure.Database.Internal.Stores
             .Set<CarEntity>()
             .AddAsync(new CarEntity
             {
-                    Id = id,
-                    Name = name,
-                    RegistrationNumber = registrationNumber,
-                });
+                Id = id,
+                Name = name,
+                RegistrationNumber = registrationNumber,
+            });
 
             try
             {

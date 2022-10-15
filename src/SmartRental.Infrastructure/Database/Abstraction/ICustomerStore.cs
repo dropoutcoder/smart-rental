@@ -1,5 +1,4 @@
 ﻿using SmartRental.Infrastructure.Database.Abstraction.Types;
-using SmartRental.Infrastructure.Database.ComplexTypes;
 
 namespace SmartRental.Infrastructure.Database.Abstraction
 {

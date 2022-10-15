@@ -5,7 +5,7 @@ namespace SmartRental.Infrastructure.Database.Abstraction
 {
     public interface IRentalStore
     {
-        public IQueryable<IRental> Query { get;} 
+        public IQueryable<IRental> Query { get; }
 
         public Task<IRental> AddRentalAsync(
             int carId,

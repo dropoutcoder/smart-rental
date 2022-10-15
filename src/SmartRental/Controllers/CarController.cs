@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartRental.Infrastructure.Database.Abstraction.Types;
-using SmartRental.Infrastructure.Database.Internal.Entities;
 using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
 

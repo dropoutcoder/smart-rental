@@ -1,13 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SmartRental.Infrastructure;
 using SmartRental.Infrastructure.Database;
 using SmartRental.Infrastructure.Database.Abstraction;
 using SmartRental.Infrastructure.Database.Abstraction.Types;
 using SmartRental.Infrastructure.Database.ComplexTypes;
-using SmartRental.Infrastructure.Database.Internal.Entities;
 using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
-using System.Diagnostics;
 
 namespace SmartRental.Operations.Internal.Handlers
 {

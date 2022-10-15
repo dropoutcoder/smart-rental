@@ -1,7 +1,4 @@
-﻿using SmartRental.Infrastructure;
-using SmartRental.Infrastructure.Database.Abstraction;
-using SmartRental.Infrastructure.Database.ComplexTypes;
-using SmartRental.Infrastructure.Database.Internal.Entities;
+﻿using SmartRental.Infrastructure.Database.Abstraction;
 
 namespace SmartRental.Services
 {

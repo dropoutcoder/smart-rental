@@ -4,13 +4,7 @@ using SmartRental.Infrastructure.Database.Abstraction.Types;
 using SmartRental.Infrastructure.Database.ComplexTypes;
 using SmartRental.Infrastructure.Database.Internal.Entities;
 using SmartRental.Infrastructure.Database.Internal.Services;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartRental.Infrastructure.Database.Internal.Stores
 {

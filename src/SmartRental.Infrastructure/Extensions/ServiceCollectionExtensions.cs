@@ -5,7 +5,6 @@ using SmartRental.Infrastructure.Database.Abstraction.Types;
 using SmartRental.Infrastructure.Database.Internal.Entities;
 using SmartRental.Infrastructure.Database.Internal.Services;
 using SmartRental.Infrastructure.Database.Internal.Stores;
-using System.Linq;
 
 namespace SmartRental.Infrastructure.Extensions
 {
