@@ -30,7 +30,7 @@ namespace SmartRental.Controllers
             return Created($"api/customer/{result.Id}", result);
         }
 
-        [HttpPatch("{id}")]
+        [HttpPatch("{id}/cancel")]
         public async Task<IActionResult> CancelAsync([FromRoute] int id, [FromServices] IHandler<CancelRental, bool> handler)
         {
             if (!ModelState.IsValid)
