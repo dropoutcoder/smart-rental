@@ -30,15 +30,6 @@ namespace SmartRental.Controllers
             return Created($"api/car/{result.Id}", result);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync([FromRoute] int id, [FromServices] IQueryable<ICar> cars)
-        {
-
-            var result = await cars.SingleOrDefaultAsync(c => c.Id == id);
-
-            return Ok(result);
-        }
-
         [HttpGet()]
         public async Task<IEnumerable<ICar>> ListAsync([FromServices] IQueryable<ICar> cars)
         {

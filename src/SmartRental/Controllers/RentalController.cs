@@ -43,15 +43,6 @@ namespace SmartRental.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync([FromRoute] int id, [FromServices] IQueryable<IRental> rentals)
-        {
-
-            var result = await rentals.SingleOrDefaultAsync(c => c.Id == id);
-
-            return Ok(result);
-        }
-
         [HttpGet()]
         public async Task<IActionResult> ListAsync([FromServices] IQueryable<IRental> rentals)
         {
