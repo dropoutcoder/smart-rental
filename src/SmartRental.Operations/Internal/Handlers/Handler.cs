@@ -1,4 +1,6 @@
-﻿namespace SmartRental.Operations.Abstraction
+﻿using SmartRental.Operations.Abstraction;
+
+namespace SmartRental.Operations.Internal.Handlers
 {
     public abstract class Handler<TCommand, TResult> : IHandler<TCommand, TResult>
     {

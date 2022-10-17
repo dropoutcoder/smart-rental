@@ -19,10 +19,6 @@ namespace SmartRental.Infrastructure.Database.Internal.Stores
 
         public DatabaseContext DbContext { get; }
 
-        public IQueryable<ICar> Query => DbContext
-            .Set<CarEntity>()
-            .Cast<ICar>();
-
         public async Task<ICar> AddCarAsync(string registrationNumber, string name)
         {
             var id = await IdProvider
@@ -51,6 +47,18 @@ namespace SmartRental.Infrastructure.Database.Internal.Stores
                 // log execution context
                 throw new StoreException("We have encountered issue while trying to save car to the database.", due);
             }
+        }
+
+        public async Task<bool> RegistrationNumberExistsAsync(string registrationNumber)
+        {
+            if (string.IsNullOrWhiteSpace(registrationNumber))
+            {
+                throw new ArgumentException($"'{nameof(registrationNumber)}' cannot be null or whitespace.", nameof(registrationNumber));
+            }
+
+            return await DbContext
+            .Set<CarEntity>()
+            .AnyAsync(c => c.RegistrationNumber == registrationNumber);
         }
     }
 }

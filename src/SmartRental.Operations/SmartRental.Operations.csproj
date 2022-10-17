@@ -10,4 +10,10 @@
     <ProjectReference Include="..\SmartRental.Infrastructure\SmartRental.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+	  <_Parameter1>SmartRental.Operations.UnitTests</_Parameter1>
+	</AssemblyAttribute>
+  </ItemGroup>
+
 </Project>

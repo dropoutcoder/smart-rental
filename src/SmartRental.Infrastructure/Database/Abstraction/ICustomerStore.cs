@@ -4,8 +4,6 @@ namespace SmartRental.Infrastructure.Database.Abstraction
 {
     public interface ICustomerStore
     {
-        public IQueryable<ICustomer> Query { get; }
-
         public Task<ICustomer> AddCustomerAsync(
             string givenName,
             string surname,

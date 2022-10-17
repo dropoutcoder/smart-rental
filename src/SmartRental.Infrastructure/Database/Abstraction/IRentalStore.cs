@@ -5,8 +5,6 @@ namespace SmartRental.Infrastructure.Database.Abstraction
 {
     public interface IRentalStore
     {
-        public IQueryable<IRental> Query { get; }
-
         public Task<IRental> AddRentalAsync(
             int carId,
             int customerId,
@@ -17,5 +15,7 @@ namespace SmartRental.Infrastructure.Database.Abstraction
             decimal price);
 
         public Task<bool> CancelRental(int rentalId);
+
+        public Task<bool> IsCancelled(int rentalId);
     }
 }

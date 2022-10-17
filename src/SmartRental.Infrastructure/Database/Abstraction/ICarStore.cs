@@ -4,10 +4,10 @@ namespace SmartRental.Infrastructure.Database.Abstraction
 {
     public interface ICarStore
     {
-        public IQueryable<ICar> Query { get; }
-
         public Task<ICar> AddCarAsync(
             string registrationNumber,
             string name);
+
+        public Task<bool> RegistrationNumberExistsAsync(string registrationNumber);
     }
 }

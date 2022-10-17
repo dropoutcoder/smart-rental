@@ -2,7 +2,6 @@
 using SmartRental.Infrastructure.Database;
 using SmartRental.Infrastructure.Database.Abstraction;
 using SmartRental.Infrastructure.Database.Abstraction.Types;
-using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
 
 namespace SmartRental.Operations.Internal.Handlers
@@ -32,9 +31,10 @@ namespace SmartRental.Operations.Internal.Handlers
 
         protected override async Task<bool> ValidateAsync(CreateCar command)
         {
+            // additional validations
+
             var exists = await Store
-                .Query
-                .AnyAsync(c => c.RegistrationNumber == command.RegistrationNumber);
+                .RegistrationNumberExistsAsync(command.RegistrationNumber);
 
             return !exists;
         }

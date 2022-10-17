@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartRental.Infrastructure.Database;
 using SmartRental.Infrastructure.Database.Abstraction;
-using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
 
 namespace SmartRental.Operations.Internal.Handlers
@@ -31,11 +30,10 @@ namespace SmartRental.Operations.Internal.Handlers
 
         protected override async Task<bool> ValidateAsync(CancelRental command)
         {
-            var exists = await Store
-                .Query
-                .AnyAsync(c => c.Id == command.RentalId && !c.IsCancelled);
+            var isCancelled = await Store
+                .IsCancelled(command.RentalId);
 
-            return exists;
+            return !isCancelled;
         }
     }
 }

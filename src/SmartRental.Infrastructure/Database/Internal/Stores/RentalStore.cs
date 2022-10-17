@@ -20,10 +20,6 @@ namespace SmartRental.Infrastructure.Database.Internal.Stores
 
         public DatabaseContext DbContext { get; }
 
-        public IQueryable<IRental> Query => DbContext
-            .Set<RentalEntity>()
-            .Cast<IRental>();
-
         public async Task<IRental> AddRentalAsync(
             int carId,
             int customerId,
@@ -92,6 +88,13 @@ namespace SmartRental.Infrastructure.Database.Internal.Stores
                 // log execution context
                 throw new StoreException("We have encountered issue while trying to save car to the database.", due);
             }
+        }
+
+        public async Task<bool> IsCancelled(int rentalId)
+        {
+            return await DbContext
+                .Set<RentalEntity>()
+                .AnyAsync(r => r.Id == rentalId && r.IsCancelled);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using SmartRental.Infrastructure.Database;
 using SmartRental.Infrastructure.Database.Abstraction;
 using SmartRental.Infrastructure.Database.Abstraction.Types;
-using SmartRental.Operations.Abstraction;
 using SmartRental.Operations.Commands;
 
 namespace SmartRental.Operations.Internal.Handlers
