@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace SmartRental.Infrastructure
 {
-    public class DatabaseContext : DbContext
+    internal class DatabaseContext : DbContext
     {
         public DatabaseContext(DbContextOptions options)
             : base(options) { }
